@@ -5,7 +5,7 @@ This game was developed for the purpose of studying JavaScript.
 
 Additionally, by modifying the original mechanics of Tetris, a comprehensive understanding of the code became essential.
 
-If you want to know more about Mirror Tetris, there are a PDF Files that explain the logic of the system.
+If you want to know more about Mirror Tetris, there is a PDF Files that explain the logic of the system.
 
 Here a brief explanation:
 
