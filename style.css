@@ -1,0 +1,47 @@
+.container {
+    display: flex; /* utilizado para agrupar as células*/
+}
+
+.grid {
+    width: 240px;
+    height: 420px;
+    display: flex; /* utilizado para agrupar as células*/
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.grid div {
+    height: 20px;
+    width: 20px;
+    box-shadow: 1px 0px 0px gray, 0px 1px 0px gray; /* borda das células*/
+}
+
+.grid div.taken {
+    background-color: grey;
+    outline: 1px solid black; 
+}
+
+.grid div.border {
+    background-color: grey;
+    outline: 1px solid black; 
+}
+
+.tetromino {
+    outline: 1px solid black; 
+}
+
+
+.mini-grid{
+    margin-left: 50px;
+    width: 80px;
+    height: 80px;
+    display: flex; 
+    flex-wrap: wrap; 
+    background-color: black;
+}
+
+.mini-grid div {
+    height: 20px;
+    width: 20px;
+    box-shadow: 1px 0px 0px gray, 0px 1px 0px gray;
+}
