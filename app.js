@@ -249,9 +249,10 @@ function depositTetromino(){
         nextRandom = chooseRandom();
         current = theTetrominoes[random][currentRot];
         currentPos = startPos;
-        drawTetromino();
+        
         showNextTetromino(); //determina a próxima peça
         checkToCleanRow();
+        drawTetromino();
         checkGameOver();
 }
 }
@@ -366,6 +367,7 @@ function chooseRandom(){
 }
 
 function checkToCleanRow(){
+  let localInverted = false;
   for(let i = 1; i < (width*(height-1)-2); i+=width){
     const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
     
@@ -376,7 +378,10 @@ function checkToCleanRow(){
       //checa se tem algum special e se tiver, atualiza a variável inverted
       if(squaresRemoved.some(index => index.classList.contains('special')))
       {
-        isInverted = !isInverted;
+        //isInverted = !isInverted;
+        if(!localInverted){
+          localInverted = true;
+        }
       }
       squaresRemoved.forEach((index) => {
         index.classList = '';
@@ -389,6 +394,69 @@ function checkToCleanRow(){
       squares.forEach(cell => grid.appendChild(cell))
     }
   }
+
+  function changeView() {
+    //em loop até percorrer todas as linha:
+
+    const matrizInvertida = [];
+    
+    for(let i = 0; i < (width*(height-1)-2); i+=width)
+    {
+      //cópia da row
+      const squaresRemoved = squares.slice(228, 240); //linha original
+      console.log(squaresRemoved);
+      const squaresRemovedAux = []; //linha invertida
+      
+      //inverte colunas dessa linha
+      for (let newCol = squaresRemoved.length - 1, col = 0; col < squaresRemoved.length; col++, newCol--) 
+      {
+        //new col = 11, col 0
+        //new col = 10, col 1
+        //new col = 9, col 2
+        //new col = 8, col 3
+        //new col = 7, col 4
+        //new col = 6, col 5
+        //new col = 5, col 6
+        //new col = 4, col 7
+        //new col = 3, col 8
+        //new col = 2, col 9
+        //new col = 1, col 10
+        //new col = 0, col 11
+        squaresRemovedAux[newCol] = squaresRemoved[col];
+      }
+    
+      matrizInvertida.push(squaresRemovedAux);
+      
+      //adiciona ela no início novamente
+      
+      squares.splice(228, 12)
+      squares = squaresRemovedAux.concat(squares) //paramos aqui, a linha inverte, mas ela aparece no início. Eu quero que ela apareça no final!
+      squares.forEach(cell => grid.appendChild(cell))
+      
+
+    }
+
+    // adição massiva não funcionando:
+    /*
+    squares.splice(0, squares.length)
+    squares = squares.concat(matrizInvertida) 
+    squares.forEach(cell => grid.appendChild(cell))
+    */
+    console.log(matrizInvertida);
+  }
+  
+
+  if(localInverted && !isInverted){ //se esse clean tiver uma linha especial e o modo de jogo não for especial
+    isInverted = true; //então agora o modo de jogo será especial
+    changeView();
+  }
+  else{
+    if(localInverted && isInverted){ //se esse clean tiver uma linha especial e o modo de jogo for especial
+      isInverted = false; //então agora o modo de jogo não será especial
+      changeView();
+    }
+  }
+  
 }
 
 function checkGameOver(){
@@ -397,15 +465,33 @@ function checkGameOver(){
     clearInterval(timerId); // pausa o timer
   }
 }
-
+/*
 function changeView(){
   newSquares = squares;
   for(let rowRunner = 0; rowRunner < (1 + width * (height-2)); rowRunner+=12){
     for(let newCol = 10, col = 1; col < 6 ;col++, newCol--){
       newSquares[newCol + rowRunner] = squares[col + rowRunner];
-      console.log(newSquares);
+      //10 nova = 1 original 
+      //9 nova = 2 original
+      //8 nova = 3 original
+      //7 nova = 4 original
+      //6 nova = 5 original
+      
+    }
+    for(let newCol = 10, col = 1; col < 6 ;col++, newCol--){
+      newSquares[col + rowRunner] = squares[newCol + rowRunner];
+      //1 nova = 10 original
+      //2 nova = 9 original
+      //3 nova = 8 original
+      //4 nova = 7 original
+      //5 nova = 6 original
+      
     }
   }
-  
+  console.log(newSquares);
+  squares = newSquares;
 }
+*/
+
+
 })
