@@ -43,6 +43,9 @@ let score = 0;
 const startPos = 18;
 let isInverted = false;
 
+backgroundColorsBorder = ['grey', 'white']
+backgroundColorsCounter = 0;
+
 const transparency = 0.45; // Defina o valor de transparência aqui
 
 const colors = [
@@ -231,36 +234,38 @@ const transparentColors = [
 
 //assigning functions to keycodes
 function control(e){
-  if(e.keyCode == 37){
-    if(!isInverted){
-      moveLeft();
+  if(timerId){
+    if(e.keyCode == 37){
+      if(!isInverted){
+        moveLeft();
+      }
+      else{
+        moveRight();
+      }
+      
     }
-    else{
-      moveRight();
+
+    else if(e.keyCode == 39){
+      if(!isInverted){
+        moveRight();
+      }
+      else{
+        moveLeft();
+      }
+      
     }
-    
-  }
 
-  else if(e.keyCode == 39){
-    if(!isInverted){
-      moveRight();
+    else if(e.keyCode == 38){
+      rotate();
     }
-    else{
-      moveLeft();
+
+    else if(e.keyCode == 40){
+      moveDown();
     }
-    
-  }
 
-  else if(e.keyCode == 38){
-    rotate();
-  }
-
-  else if(e.keyCode == 40){
-    moveDown();
-  }
-
-  else if(e.keyCode == 32){
-    hardDrop();
+    else if(e.keyCode == 32){
+      hardDrop();
+    }
   }
 }
 
@@ -462,6 +467,7 @@ function checkToCleanRow(){
       squaresRemoved[squaresRemoved.length-1].classList.add('taken'); //último
       squares = squaresRemoved.concat(squares)
       squares.forEach(cell => grid.appendChild(cell))
+      
     }
   }
 
@@ -470,7 +476,7 @@ function checkToCleanRow(){
     finalLocalScore = localScore * counterRowsCleaned;
     score += finalLocalScore; //add score
     scoreDisplay.innerHTML = score; //atualiza ui do score
-
+    
     //increase speed
     handleSpeed();
   }
@@ -481,13 +487,17 @@ function checkToCleanRow(){
     isInverted = true; //então agora o modo de jogo será especial
     Mirror();
   }
-  else{
+  else
+  {
     if(localInverted && isInverted){ //se esse clean tiver uma linha especial e o modo de jogo for especial
       isInverted = false; //então agora o modo de jogo não será especial
       Mirror();
     }
-
-}
+    else{
+      changeBorderColor(0);
+    }
+  }
+  
 
 }
 
@@ -522,12 +532,18 @@ function Mirror() {
     squares = squaresRemovedAux.concat(squares);
     squares.forEach(cell => grid.appendChild(cell));
   }
+  changeBorderColor(1);
 }
 
 function checkGameOver(){
   if(current.some(index => squares[currentPos + index].classList.contains('taken'))){
-    scoreDisplay.innerText = "Game Over! :( " //atualiza o texto 
+    //scoreDisplay.innerText = "Game Over! :( " //atualiza o texto 
+
     clearInterval(timerId); // pausa o timer
+
+    //pop up and reload
+    alert("Game over :(");
+    window.location.reload();
   }
 }
 
@@ -549,7 +565,34 @@ function calculateSpeedMultiplier() {
   return multiplier;
 }
 
+function changeBorderColor(changeInt){
+  
+  if(changeInt == 1)
+  {
+    backgroundColorsCounter++;
+    if(backgroundColorsCounter > backgroundColorsBorder.length){
+      backgroundColorsCounter = 0;
+    }
+  }
+  
 
+  let newColor = backgroundColorsBorder[backgroundColorsCounter];
+  const gridDivs = document.querySelectorAll('.grid div');
+
+  // Altere o background-color dos elementos de acordo com as condições
+  for (let i = gridDivs.length - width; i < gridDivs.length; i++) {
+    gridDivs[i].style.backgroundColor = newColor;
+  }
+
+  for (let i = 0; i < (width * (height - 1)); i += width) {
+    gridDivs[i].style.backgroundColor = newColor;
+  }
+
+  for (let i = width - 1; i < width * height - 1; i += width) {
+    gridDivs[i].style.backgroundColor = newColor;
+  }
+
+}
 
 
 })
