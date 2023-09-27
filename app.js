@@ -43,6 +43,8 @@ let score = 0;
 const startPos = 18;
 let isInverted = false;
 
+const transparency = 0.45; // Defina o valor de transparência aqui
+
 const colors = [
   'orange',
   'red',
@@ -51,14 +53,32 @@ const colors = [
   'rgb(0, 173, 230)', 
   'blue',
   'green',
-  'white',
-  'white',
-  'white',
-  'white',
-  'white',
-  'white',
-  'white'
-]
+  'pink', 
+  'pink', 
+  'pink', 
+  'pink', 
+  'pink', 
+  'pink', 
+  'pink'  
+];
+
+const transparentColors = [
+  `rgba(255, 165, 0, ${transparency})`,   // Orange
+  `rgba(255, 0, 0, ${transparency})`,     // Red
+  `rgba(128, 0, 128, ${transparency})`,   // Purple
+  `rgba(255, 255, 0, ${transparency})`,   // Yellow
+  `rgba(0, 173, 230, ${transparency})`,   // Light Blue
+  `rgba(0, 0, 255, ${transparency})`,     // Blue
+  `rgba(0, 128, 0, ${transparency})`,     // Green
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`, // Pink
+  `rgba(255, 192, 203, ${transparency})`  // Pink
+];
+
 
   //The Tetrominoes
   const lTetromino = [
@@ -189,21 +209,24 @@ const colors = [
   let current = theTetrominoes[random][currentRot];
 
   function drawTetromino(){
+    drawGhost();
     current.forEach(index => {
         squares[currentPos + index].classList.add("tetromino");
         squares[currentPos + index].style.backgroundColor = colors[random];
     })
 
-    drawGhost();
+    
   }
 
   function undrawTetromino(){
+    undrawGhost();
+    
     current.forEach(index => {
         squares[currentPos + index].classList.remove("tetromino");
         squares[currentPos + index].style.backgroundColor = "";
     })
 
-    undrawGhost();
+    
   }
 
 //assigning functions to keycodes
@@ -253,6 +276,7 @@ function moveDown(){
 
 function depositTetromino(){
     if(current.some(index => squares[currentPos + index + width].classList.contains("taken"))) {
+        
         current.forEach(index => squares[currentPos + index].classList.add("taken"));
         //checa se é invertido e adiciona uma classe no div em relação a isso
         if(theTetrominoesNames[random].includes("Special"))
@@ -287,7 +311,7 @@ function drawGhost(){
   }
 
   current.forEach(index => {
-    squares[previewPos + index].style.backgroundColor = colors[random];
+    squares[previewPos + index].style.backgroundColor = transparentColors[random];
 })
 
 }
