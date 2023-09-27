@@ -32,11 +32,17 @@ let scoreDisplay = document.getElementById("score");
 const startBtn = document.getElementById("start-button");
 let nextRandom = 0;
 let timerId;
-const timeMoveDown = 500;
+
+const initialSpeed = 800;
+let currentSpeed = initialSpeed;
+let speedIncrease = 100;
+let scoreToIncreaseSpeed = 10;
+let minimumSpeed = 100;
 let upScore = 10;
 let score = 0;
 const startPos = 18;
 let isInverted = false;
+
 const colors = [
   'orange',
   'red',
@@ -224,12 +230,16 @@ function control(e){
   else if(e.keyCode == 40){
     moveDown();
   }
+
+  else if(e.keyCode == 32){
+    hardDrop();
+  }
 }
 
 document.addEventListener('keyup', control);
 
 function moveDown(){
-    depositTetromino(); //check if cllided
+    depositTetromino(); //check if collided
     undrawTetromino();
     currentPos += width; //goes down a row
     drawTetromino();
@@ -256,6 +266,14 @@ function depositTetromino(){
         checkGameOver();
 }
 }
+
+function hardDrop() {
+  while (!current.some(index => squares[currentPos + index + width].classList.contains("taken"))) {
+    moveDown();
+  }
+  depositTetromino();
+}
+
 
 //move left, unless it is on the edge or there is something else blocking
 
@@ -355,7 +373,7 @@ startBtn.addEventListener('click', () => {
   }
   else{
     drawTetromino();
-    timerId = setInterval(moveDown, timeMoveDown);
+    timerId = setInterval(moveDown, currentSpeed);
     nextRandom = chooseRandom();
     showNextTetromino();
   }
@@ -368,12 +386,16 @@ function chooseRandom(){
 
 function checkToCleanRow(){
   let localInverted = false;
+  let localScore = 0;
+  let finalLocalScore = 0;
+  let counterRowsCleaned = 0;
+
   for(let i = 1; i < (width*(height-1)-2); i+=width){
     const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
     
     if(row.every(index => squares[index].classList.contains('taken'))) {
-      score += upScore; //add score
-      scoreDisplay.innerHTML = score; //atualiza ui do score
+      localScore+=upScore;
+      counterRowsCleaned++;
       const squaresRemoved = squares.splice(i, width)
       //checa se tem algum special e se tiver, atualiza a variável inverted
       if(squaresRemoved.some(index => index.classList.contains('special')))
@@ -395,40 +417,18 @@ function checkToCleanRow(){
     }
   }
 
-  function Mirror() {
-    //em loop até percorrer todas as linha:
-    for(let i = 0; i < (width*(height-1)-2); i+=width)
-    {
-      //cópia da row
-      const squaresRemoved = squares.slice(width*(height-2), width*(height-2) + width); //linha original
-      const squaresRemovedAux = []; //linha invertida
-      
-      //inverte colunas dessa linha
-      for (let newCol = squaresRemoved.length - 1, col = 0; col < squaresRemoved.length; col++, newCol--) 
-      {
-        //new col = 11, col 0
-        //new col = 10, col 1
-        //new col = 9, col 2
-        //new col = 8, col 3
-        //new col = 7, col 4
-        //new col = 6, col 5
-        //new col = 5, col 6
-        //new col = 4, col 7
-        //new col = 3, col 8
-        //new col = 2, col 9
-        //new col = 1, col 10
-        //new col = 0, col 11
-        squaresRemovedAux[newCol] = squaresRemoved[col];
-      }
-      
-      //adiciona ela no início novamente
-      squares.splice(width*(height-2), width);
-      squares = squaresRemovedAux.concat(squares);
-      squares.forEach(cell => grid.appendChild(cell));
-    }
+  //handle score:
+  if(localScore > 0){
+    finalLocalScore = localScore * counterRowsCleaned;
+    score += finalLocalScore; //add score
+    scoreDisplay.innerHTML = score; //atualiza ui do score
+
+    //increase speed
+    handleSpeed();
   }
   
 
+  //inversão do tabuleiro:
   if(localInverted && !isInverted){ //se esse clean tiver uma linha especial e o modo de jogo não for especial
     isInverted = true; //então agora o modo de jogo será especial
     Mirror();
@@ -438,8 +438,42 @@ function checkToCleanRow(){
       isInverted = false; //então agora o modo de jogo não será especial
       Mirror();
     }
+
+}
+
+}
+
+function Mirror() {
+  //em loop até percorrer todas as linha:
+  for(let i = 0; i < (width*(height-1)-2); i+=width)
+  {
+    //cópia da row
+    const squaresRemoved = squares.slice(width*(height-2), width*(height-2) + width); //linha original
+    const squaresRemovedAux = []; //linha invertida
+    
+    //inverte colunas dessa linha
+    for (let newCol = squaresRemoved.length - 1, col = 0; col < squaresRemoved.length; col++, newCol--) 
+    {
+      //new col = 11, col 0
+      //new col = 10, col 1
+      //new col = 9, col 2
+      //new col = 8, col 3
+      //new col = 7, col 4
+      //new col = 6, col 5
+      //new col = 5, col 6
+      //new col = 4, col 7
+      //new col = 3, col 8
+      //new col = 2, col 9
+      //new col = 1, col 10
+      //new col = 0, col 11
+      squaresRemovedAux[newCol] = squaresRemoved[col];
+    }
+    
+    //adiciona ela no início novamente
+    squares.splice(width*(height-2), width);
+    squares = squaresRemovedAux.concat(squares);
+    squares.forEach(cell => grid.appendChild(cell));
   }
-  
 }
 
 function checkGameOver(){
@@ -448,5 +482,26 @@ function checkGameOver(){
     clearInterval(timerId); // pausa o timer
   }
 }
+
+function handleSpeed(){
+  let newSpeed = calculateNewSpeed();
+  if (score % scoreToIncreaseSpeed === 0 &&  newSpeed > minimumSpeed) {
+    currentSpeed = newSpeed;
+    console.log(currentSpeed);
+  }
+}
+
+function calculateNewSpeed(){
+  return initialSpeed - calculateSpeedMultiplier() * speedIncrease;
+}
+
+function calculateSpeedMultiplier() {
+  const multiplier = Math.floor(score / scoreToIncreaseSpeed);
+  console.log("Speed multiplier: " + multiplier);
+  return multiplier;
+}
+
+
+
 
 })
