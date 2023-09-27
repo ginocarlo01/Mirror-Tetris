@@ -182,6 +182,7 @@ const colors = [
 
   
   let currentPos = startPos;
+  let previewPos = 0;
   let currentRot = 0;
 
   let random = chooseRandom();
@@ -192,6 +193,8 @@ const colors = [
         squares[currentPos + index].classList.add("tetromino");
         squares[currentPos + index].style.backgroundColor = colors[random];
     })
+
+    drawGhost();
   }
 
   function undrawTetromino(){
@@ -199,6 +202,8 @@ const colors = [
         squares[currentPos + index].classList.remove("tetromino");
         squares[currentPos + index].style.backgroundColor = "";
     })
+
+    undrawGhost();
   }
 
 //assigning functions to keycodes
@@ -274,6 +279,25 @@ function hardDrop() {
   depositTetromino();
 }
 
+
+function drawGhost(){
+  previewPos = currentPos;
+  while (!current.some(index => squares[previewPos + index + width].classList.contains("taken"))) {
+    previewPos += width;
+  }
+
+  current.forEach(index => {
+    squares[previewPos + index].style.backgroundColor = colors[random];
+})
+
+}
+
+function undrawGhost(){
+  current.forEach(index => {
+    squares[previewPos + index].style.backgroundColor = "";
+})
+
+}
 
 //move left, unless it is on the edge or there is something else blocking
 
