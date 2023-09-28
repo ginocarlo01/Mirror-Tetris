@@ -43,7 +43,7 @@ let score = 0;
 const startPos = 18;
 let isInverted = false;
 
-backgroundColorsBorder = ['grey', 'white']
+backgroundColorsBorder = ['grey', 'darkgreen']
 backgroundColorsCounter = 0;
 
 const transparency = 0.45; // Defina o valor de transparência aqui
@@ -430,6 +430,9 @@ startBtn.addEventListener('click', () => {
     nextRandom = chooseRandom();
     showNextTetromino();
   }
+
+  //"deseleciona" o botão
+  startBtn.blur();
 })
 
 //selecionar peça randomicamente
@@ -486,18 +489,18 @@ function checkToCleanRow(){
   if(localInverted && !isInverted){ //se esse clean tiver uma linha especial e o modo de jogo não for especial
     isInverted = true; //então agora o modo de jogo será especial
     Mirror();
+    
   }
   else
   {
     if(localInverted && isInverted){ //se esse clean tiver uma linha especial e o modo de jogo for especial
       isInverted = false; //então agora o modo de jogo não será especial
       Mirror();
-    }
-    else{
-      changeBorderColor(0);
+      
     }
   }
-  
+
+  changeBorderColor(0);
 
 }
 
@@ -551,7 +554,6 @@ function handleSpeed(){
   let newSpeed = calculateNewSpeed();
   if (score % scoreToIncreaseSpeed === 0 &&  newSpeed > minimumSpeed) {
     currentSpeed = newSpeed;
-    console.log(currentSpeed);
   }
 }
 
@@ -561,7 +563,7 @@ function calculateNewSpeed(){
 
 function calculateSpeedMultiplier() {
   const multiplier = Math.floor(score / scoreToIncreaseSpeed);
-  console.log("Speed multiplier: " + multiplier);
+  
   return multiplier;
 }
 
@@ -570,12 +572,12 @@ function changeBorderColor(changeInt){
   if(changeInt == 1)
   {
     backgroundColorsCounter++;
-    if(backgroundColorsCounter > backgroundColorsBorder.length){
+    if(backgroundColorsCounter > backgroundColorsBorder.length - 1){
       backgroundColorsCounter = 0;
     }
   }
   
-
+  console.log(backgroundColorsCounter);
   let newColor = backgroundColorsBorder[backgroundColorsCounter];
   const gridDivs = document.querySelectorAll('.grid div');
 
