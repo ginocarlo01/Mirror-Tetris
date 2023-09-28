@@ -1,5 +1,16 @@
+body {
+    background-image: url('anna-teather-fantasy-bk-anim.gif'); /* Substitua 'caminho-para-sua-imagem.jpg' pelo caminho real para a sua imagem */
+    background-size: cover; /* Isso faz com que a imagem de fundo cubra toda a área do corpo */
+    background-repeat: no-repeat; /* Evita que a imagem de fundo seja repetida */
+  }
+  
+
 .container {
     display: flex; /* utilizado para agrupar as células*/
+    justify-content: center; /* Centralize o conteúdo horizontalmente */
+    align-items: center; /* Centralize o conteúdo verticalmente */
+    
+  
 }
 
 .grid {
@@ -45,3 +56,26 @@
     width: 20px;
     box-shadow: 1px 0px 0px gray, 0px 1px 0px gray;
 }
+
+.centered-text {
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 auto;
+    display: table; /* Use a propriedade table para centralizar horizontalmente */
+}
+
+
+  
+  
+  
+.centered-button {
+display: block;
+margin: 0 auto;
+background-color: white;
+width: 150px; /* Largura desejada */
+  height: 50px; /* Altura desejada */
+  border-radius: 5px;
+}
+  

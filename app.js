@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  
   const width = 12;
   const height = 21;
 
@@ -293,7 +293,7 @@ function depositTetromino(){
         nextRandom = chooseRandom();
         current = theTetrominoes[random][currentRot];
         currentPos = startPos;
-        
+        dropSFX()
         showNextTetromino(); //determina a próxima peça
         checkToCleanRow();
         drawTetromino();
@@ -433,6 +433,7 @@ startBtn.addEventListener('click', () => {
 
   //"deseleciona" o botão
   startBtn.blur();
+  playBackgroundMusic();
 })
 
 //selecionar peça randomicamente
@@ -536,6 +537,7 @@ function Mirror() {
     squares.forEach(cell => grid.appendChild(cell));
   }
   changeBorderColor(1);
+  tetrisSFX();
 }
 
 function checkGameOver(){
@@ -544,9 +546,11 @@ function checkGameOver(){
 
     clearInterval(timerId); // pausa o timer
 
+    lostSFX();
     //pop up and reload
     alert("Game over :(");
     window.location.reload();
+    stopBackgroundMusic();
   }
 }
 
@@ -594,6 +598,34 @@ function changeBorderColor(changeInt){
     gridDivs[i].style.backgroundColor = newColor;
   }
 
+}
+
+const audioDrop = document.getElementById('drop');
+const audioTetris = document.getElementById('tetris');
+const lostTetris =  document.getElementById('lost');
+
+function dropSFX() {
+  audioDrop.play();
+}
+
+function tetrisSFX() {
+  audioTetris.play();
+}
+
+function lostSFX() {
+  lostTetris.play();
+}
+
+function playBackgroundMusic() {
+  const backgroundAudio = document.getElementById('backgroundAudio');
+  backgroundAudio.play();
+  backgroundAudio.volume = 0.3; 
+}
+
+function stopBackgroundMusic() {
+  const backgroundAudio = document.getElementById('backgroundAudio');
+  backgroundAudio.pause();
+  backgroundAudio.currentTime = 0; // Reinicia a música para o início
 }
 
 

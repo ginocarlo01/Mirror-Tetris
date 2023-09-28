@@ -8,10 +8,13 @@
   </head>
   <body>
     
-    <h1>Score:<span id="score">0</span></h1>
-    <p>Left/Right Arrows for move, Up Arrow to rotate and Spacebar to hard drop</p>
-    
-    <button id="start-button" >Start/Pause</button>
+    <h1 class="centered-text">Score:<span id="score">0</span></h1>
+    <br />
+    <br />
+    <p class="centered-text">Left/Right Arrows for move, Up Arrow to rotate and Spacebar to hard drop</p>
+    <br />
+    <br />
+    <button id="start-button" class="centered-button">Start/Pause</button>
     <br />
     <br />
     <div class="container">
@@ -36,5 +39,23 @@
         <div></div>
       </div>
     </div>
+
+    <audio id="drop">
+      <source src="drop.wav" type="audio/mpeg">
+    </audio>
+
+    <audio id="tetris">
+      <source src="tetris.wav" type="audio/mpeg">
+    </audio>
+
+    <audio id="lost">
+      <source src="lost.wav" type="audio/mpeg">
+    </audio>
+
+    <audio id="backgroundAudio" loop>
+      <source src="backgroundsong.mp3" type="audio/mpeg">
+    </audio>
+
+    
   </body>
 </html>
