@@ -13,6 +13,6 @@ Here a brief explanation:
 
 ## 👨‍💻 Team
 [Gino Carlo](https://ginocarlo01.itch.io/)
---> responsible for the Game Design and Programming of this project
+--> responsible for the full development of this project
 
 
