@@ -1,9 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
   
-  const width = 12;
-  const height = 21;
+  let width = 12;
+  let height = 21;
+  let newWidth = 24;
+  let newHeight = 45;
+  let oriWidth = width;
+  let oriHeight = height;
+
+  let res = "";
+
+
 
   const tetrisGrid = document.querySelector('.grid');
+
+  const storedRes = localStorage.getItem('res');
+  if (storedRes) {
+    res = storedRes;
+    if (res === 'new') {
+      width = newWidth;
+      height = newHeight;
+      tetrisGrid.style.width = `480px`;
+      tetrisGrid.style.height = `900px`;
+    } else {
+      width = oriWidth;
+      height = oriHeight;
+      tetrisGrid.style.width = `240px`;
+      tetrisGrid.style.height = `420px`;
+    }
+  }
 
   for (let i = 0; i < (height*width); i++) { 
     const div = document.createElement('div');
@@ -427,13 +451,23 @@ startBtn.addEventListener('click', () => {
   else{
     drawTetromino();
     timerId = setInterval(moveDown, currentSpeed);
-    nextRandom = chooseRandom();
     showNextTetromino();
   }
 
   //"deseleciona" o botão
   startBtn.blur();
   playBackgroundMusic();
+})
+
+const changeSizeButton = document.getElementById('change-size');
+
+changeSizeButton.addEventListener('click', () => {
+  res = res === "original" ? "new" : "original";
+
+  // Save the updated 'res' value back to localStorage
+  localStorage.setItem('res', res);
+
+  location.reload();
 })
 
 //selecionar peça randomicamente
@@ -581,7 +615,6 @@ function changeBorderColor(changeInt){
     }
   }
   
-  console.log(backgroundColorsCounter);
   let newColor = backgroundColorsBorder[backgroundColorsCounter];
   const gridDivs = document.querySelectorAll('.grid div');
 

@@ -14,8 +14,10 @@ body {
 }
 
 .grid {
-    width: 240px;
-    height: 420px;
+    width: 240px;  /*12 * 20 */
+    height: 420px; /*21 * 20 */
+    /*width: 480px; /* 24 * 20 */
+    /*height: 900px;  /*45 * 20 */
     display: flex; /* utilizado para agrupar as células*/
     flex-wrap: wrap;
     background-color: black;
@@ -57,6 +59,16 @@ body {
     box-shadow: 1px 0px 0px black, 0px 1px 0px black;
 }
 
+.centered-score {
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    display: table; /* Use a propriedade table para centralizar horizontalmente */
+    color: red;
+}
+
 .centered-text {
     text-align: center;
     background-color: white;
@@ -64,18 +76,30 @@ body {
     padding: 10px 20px;
     margin: 0 auto;
     display: table; /* Use a propriedade table para centralizar horizontalmente */
+    font-size: large;
 }
 
 
-  
-  
-  
 .centered-button {
-display: block;
-margin: 0 auto;
-background-color: white;
-width: 150px; /* Largura desejada */
-  height: 50px; /* Altura desejada */
-  border-radius: 5px;
+    background-color: white;
+    font-size: large;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 0 0px; /* Adjust the margin to control spacing */
 }
-  
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#change-size {
+    color: blue; 
+}
+
+#start-button {
+    color: purple; 
+}
