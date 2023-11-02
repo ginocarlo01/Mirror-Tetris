@@ -14,11 +14,9 @@ body {
 }
 
 .grid {
-    width: 240px;  /*12 * 20 */
-    height: 420px; /*21 * 20 */
-    /*width: 480px; /* 24 * 20 */
-    /*height: 900px;  /*45 * 20 */
-    display: flex; /* utilizado para agrupar as células*/
+    width: 240px;  
+    height: 420px; 
+    display: flex; 
     flex-wrap: wrap;
     background-color: black;
 }

@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let width = 12;
   let height = 21;
+
   let newWidth = 24;
   let newHeight = 45;
+
   let oriWidth = width;
   let oriHeight = height;
 
   let res = "";
-
-
 
   const tetrisGrid = document.querySelector('.grid');
 
@@ -53,24 +53,37 @@ const grid = document.querySelector(".grid");
 
 let squares = Array.from(document.querySelectorAll(".grid div")); 
 let scoreDisplay = document.getElementById("score");
+let levelDisplay = document.getElementById("level");
+let linesDisplay = document.getElementById("lines");
 const startBtn = document.getElementById("start-button");
 let nextRandom = 0;
 let timerId;
 
 const initialSpeed = 800;
 let currentSpeed = initialSpeed;
-let speedIncrease = 100;
-let scoreToIncreaseSpeed = 10;
-let minimumSpeed = 100;
+let speedIncrease = 30;
+let minimumSpeed = 30;
+
+let scoreToIncreaseSpeed = 300;
+
 let upScore = 10;
 let score = 0;
+
+const timerDisplay = document.getElementById('time');
+let minutes = 0;
+let seconds = 0;
+let timerInterval; // Variável para manter o ID do intervalo
+let isTimerRunning = false; // Variável de controle
+
+let linesCleaned = 0;
+
 const startPos = 18;
 let isInverted = false;
 
 backgroundColorsBorder = ['grey', 'darkgreen']
 backgroundColorsCounter = 0;
 
-const transparency = 0.45; // Defina o valor de transparência aqui
+const transparency = 0.45;
 
 const colors = [
   'orange',
@@ -227,7 +240,6 @@ const transparentColors = [
   "loTetrominoSpecial"
 ]
 
-  
   let currentPos = startPos;
   let previewPos = 0;
   let currentRot = 0;
@@ -235,14 +247,14 @@ const transparentColors = [
   let random = chooseRandom();
   let current = theTetrominoes[random][currentRot];
 
+
+
   function drawTetromino(){
     drawGhost();
     current.forEach(index => {
         squares[currentPos + index].classList.add("tetromino");
         squares[currentPos + index].style.backgroundColor = colors[random];
     })
-
-    
   }
 
   function undrawTetromino(){
@@ -252,8 +264,6 @@ const transparentColors = [
         squares[currentPos + index].classList.remove("tetromino");
         squares[currentPos + index].style.backgroundColor = "";
     })
-
-    
   }
 
 //assigning functions to keycodes
@@ -442,17 +452,47 @@ function showNextTetromino(){
   })
 }
 
+function updateTimerDisplay() {
+  timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function startTimer() {
+  if (!isTimerRunning) {
+    timerInterval = setInterval(function () {
+      seconds++;
+      if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+      }
+      updateTimerDisplay();
+    }, 1000);
+    isTimerRunning = true;
+  }
+}
+
+function pauseTimer() {
+  clearInterval(timerInterval); // Pausa o intervalo
+  isTimerRunning = false;
+}
+
+function resumeTimer() {
+  startTimer(); // Continua o intervalo
+}
+
 //button
 startBtn.addEventListener('click', () => {
   if(timerId){ //se tiver alguma informação no timerId
     clearInterval(timerId); //para o timerId
+    pauseTimer();
     timerId = null; //timerId se torna nulo novamente
   }
   else{
     drawTetromino();
+    resumeTimer();
     timerId = setInterval(moveDown, currentSpeed);
     showNextTetromino();
   }
+
 
   //"deseleciona" o botão
   startBtn.blur();
@@ -515,11 +555,12 @@ function checkToCleanRow(){
     score += finalLocalScore; //add score
     scoreDisplay.innerHTML = score; //atualiza ui do score
     
+    handleLinesCleaned(counterRowsCleaned);
     //increase speed
     handleSpeed();
   }
   
-
+  
   //inversão do tabuleiro:
   if(localInverted && !isInverted){ //se esse clean tiver uma linha especial e o modo de jogo não for especial
     isInverted = true; //então agora o modo de jogo será especial
@@ -537,6 +578,15 @@ function checkToCleanRow(){
 
   changeBorderColor(0);
 
+}
+
+function handleLinesCleaned(newLines){
+  linesCleaned += newLines;
+  linesDisplay.innerHTML = linesCleaned;
+}
+
+function handleLevel(newLevel){
+  levelDisplay.innerHTML = newLevel;
 }
 
 function Mirror() {
@@ -590,7 +640,8 @@ function checkGameOver(){
 
 function handleSpeed(){
   let newSpeed = calculateNewSpeed();
-  if (score % scoreToIncreaseSpeed === 0 &&  newSpeed > minimumSpeed) {
+  if (newSpeed > minimumSpeed) {
+    
     currentSpeed = newSpeed;
   }
 }
@@ -601,7 +652,7 @@ function calculateNewSpeed(){
 
 function calculateSpeedMultiplier() {
   const multiplier = Math.floor(score / scoreToIncreaseSpeed);
-  
+  handleLevel(multiplier);
   return multiplier;
 }
 
