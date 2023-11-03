@@ -9,6 +9,57 @@ document.addEventListener('DOMContentLoaded', () => {
   let oriWidth = width;
   let oriHeight = height;
 
+  let xhttp;
+
+  function fillRankingTable(rounds) {
+    for (let i = 0; i < rounds.length; i++) {
+        const round = rounds[i]; // Obtenha os dados do round
+        const idPartidaCell = document.getElementById(`id${i + 1}`);
+        const scoreCell = document.getElementById(`score${i + 1}`);
+        const levelCell = document.getElementById(`level${i + 1}`);
+        const timeCell = document.getElementById(`time${i + 1}`);
+
+        idPartidaCell.textContent = round.RankID;
+        scoreCell.textContent = round.Score;
+        levelCell.textContent = round.Level;
+        timeCell.textContent = round.Duration;
+    }
+}
+
+
+  function getRoundData() {
+    var xhttp = new XMLHttpRequest();
+    if (!xhttp) {
+      alert('Não foi possível criar um objeto XMLHttpRequest.');
+      return false;
+    }
+  
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+      if (xhttp.status === 200) {
+        
+        let resposta = JSON.parse(xhttp.responseText);
+        if (resposta.status === 'success') {
+
+          const rounds = resposta.rounds;
+
+          fillRankingTable(rounds);
+          
+        }
+
+      } else {
+        console.log("Ha um problema ao mandar os dados!!");
+      }
+    }
+  };
+  
+    xhttp.open('POST', 'GetRoundData.php', true);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  
+    xhttp.send();
+  }
+  getRoundData();
+
   let res = "";
 
   const tetrisGrid = document.querySelector('.grid');
@@ -76,6 +127,7 @@ let timerInterval; // Variável para manter o ID do intervalo
 let isTimerRunning = false; // Variável de controle
 
 let linesCleaned = 0;
+let currentLevel = 0;
 
 const startPos = 18;
 let isInverted = false;
@@ -586,6 +638,7 @@ function handleLinesCleaned(newLines){
 }
 
 function handleLevel(newLevel){
+  currentLevel = newLevel;
   levelDisplay.innerHTML = newLevel;
 }
 
@@ -626,9 +679,9 @@ function Mirror() {
 
 function checkGameOver(){
   if(current.some(index => squares[currentPos + index].classList.contains('taken'))){
-    //scoreDisplay.innerText = "Game Over! :( " //atualiza o texto 
+    sendRoundData();
 
-    clearInterval(timerId); // pausa o timer
+    clearInterval(timerId); 
 
     lostSFX();
     //pop up and reload
@@ -711,6 +764,38 @@ function stopBackgroundMusic() {
   backgroundAudio.pause();
   backgroundAudio.currentTime = 0; // Reinicia a música para o início
 }
+
+function sendRoundData() {
+  xhttp = new XMLHttpRequest();
+  if (!xhttp) {
+      alert('Não foi possível criar um objeto XMLHttpRequest.');
+      return false;
+  }
+
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+      if (xhttp.status === 200) {
+      } else {
+        console.log("Ha um problema ao mandar os dados!!");
+      }
+    }
+  };
+
+  var data = {
+      score: score,
+      level: currentLevel,
+      time: `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  };
+
+  var encodedData = Object.keys(data).map(function(key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+  }).join('&');
+
+  xhttp.open('POST', 'SendRoundData.php', true);
+  xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhttp.send(encodedData);
+}
+
 
 
 })

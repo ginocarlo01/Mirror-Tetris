@@ -17,33 +17,81 @@
     
     <br />
     <br />
-    <p class="centered-text">Level: <span id="level">0</span> | Timer: <span id="time">0</span> | Lines: <span id="lines">0</span> </p>
+    <p class="centered-text">Level: <span id="level">0</span> | Timer: <span id="time">0</span> | Lines: <span id="lines">0</span></p>
+    <p class="centered-text"><a href="CheckCredentialsBeforeEdit.php">Editar Dados</a> | <a href="Exit.php">Sair</a></p>
     <p class="centered-text">Left/Right Arrows to move, Up Arrow to rotate and Spacebar to hard drop</p>
     
     <br />
     <br />
     <div class="container">
+        <div class="table-container">
+          <table class="ranking-table">
+              <caption>Ranking Top 5 Partidas Passadas</caption>
+              <thead>
+                  <tr>
+                      <th>ID Partida</th>
+                      <th>Score</th>
+                      <th>Level</th>
+                      <th>Time</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr id="row1">
+                      <td id="id1">-</td>
+                      <td id="score1">-</td>
+                      <td id="level1">-</td>
+                      <td id="time1">-</td>
+                  </tr>
+                  <tr id="row2">
+                      <td id="id2">-</td>
+                      <td id="score2">-</td>
+                      <td id="level2">-</td>
+                      <td id="time2">-</td>
+                  </tr>
+                  <tr id="row3">
+                      <td id="id3">-</td>
+                      <td id="score3">-</td>
+                      <td id="level3">-</td>
+                      <td id="time3">-</td>
+                  </tr>
+                  <tr id="row4">
+                      <td id="id4">-</td>
+                      <td id="score4">-</td>
+                      <td id="level4">-</td>
+                      <td id="time4">-</td>
+                  </tr>
+                  <tr id="row5">
+                      <td id="id5">-</td>
+                      <td id="score5">-</td>
+                      <td id="level5">-</td>
+                      <td id="time5">-</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
       <div class="grid">
       </div>
       <div class="mini-grid">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <p id="rounds-list"></p>
       </div>
-    </div>
+  </div>
+  
 
     <audio id="drop">
       <source src="drop.wav" type="audio/mpeg">

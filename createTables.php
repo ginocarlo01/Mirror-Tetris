@@ -21,7 +21,7 @@
                         Username VARCHAR(50) NOT NULL,
                         Score INT NOT NULL,
                         Level INT NOT NULL,
-                        Duration TIME NOT NULL,
+                        Duration VARCHAR(20) NOT NULL,
                         FOREIGN KEY (Username) REFERENCES Users(Username)
                       )";
 
