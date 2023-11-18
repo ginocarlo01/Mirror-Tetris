@@ -11,6 +11,8 @@ Here a brief explanation:
 
 "The mirrored Tetris has a significant feature that completely alters the original game. It includes an additional set of tetrominoes, with distinct colors from the original ones. When you clear a line that contains at least one of these 'special' tetrominoes, the entire game state is reversed. If you move to the right, the game moves to the left, and the game board itself also undergoes inversion."
 
+If you want to watch the explanation video: https://www.youtube.com/watch?v=HDq930cYWzY&ab_channel=GinoCarlo
+
 ## 👨‍💻 Team
 [Gino Carlo](https://ginocarlo01.itch.io/)
 --> responsible for the full development of this project
