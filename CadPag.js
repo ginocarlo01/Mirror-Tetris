@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const passWordInput = document.getElementById("pass_word");
     const logInButton = document.getElementById("log_in");
 
-    // Disable the logIn button initially
     logInButton.disabled = true;
 
-    // Add input event listeners to the input fields
     usernameInput.addEventListener("input", checkInputs);
     nameCoInput.addEventListener("input", checkInputs);
     cpfInput.addEventListener("input", checkInputs);
@@ -21,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     passWordInput.addEventListener("input", checkInputs);
 
     function checkInputs() {
-        // Check if all input fields have values
         if (
             usernameInput.value.trim() !== "" &&
             nameCoInput.value.trim() !== "" &&
@@ -31,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
             emailInput.value.trim() !== "" &&
             passWordInput.value.trim() !== ""
         ) {
-            logInButton.disabled = false; // Enable the logIn button
+            logInButton.disabled = false; 
         } else {
-            logInButton.disabled = true; // Disable the logIn button
+            logInButton.disabled = true;
         }
     }
 });

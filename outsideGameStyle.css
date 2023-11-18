@@ -13,6 +13,16 @@ body {
      }
 }
 
+.centered-text {
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px auto; /* Adicionado espaço superior (margem) de 10px */
+    display: table; /* Use a propriedade table para centralizar horizontalmente */
+    font-size: large;
+}
+
 .NavBox{
     font-family: 'Kanit', sans-serif;
     font-size: 20px;
@@ -396,6 +406,7 @@ label{
     text-align: center;
     color: rgb(0, 0, 0);
 }
+
 
 #ranking-container {
     font-family: 'Kanit', sans-serif;

@@ -6,14 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = new PDO("mysql:host=localhost;dbname=myDB", "root", "");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-        $localUsername = $_SESSION["username"];
-
         $roundsSQL = 
         "SELECT *
-        FROM Rankings r
-        WHERE Username = '$localUsername'
-        ORDER BY Score DESC
-        LIMIT 5
+        FROM Rankings
+        ORDER BY Score DESC, Username DESC
+        LIMIT 10
         ";
 
         $stmt = $conn->query($roundsSQL);

@@ -8,12 +8,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         $localUsername = $_SESSION["username"];
 
-        $roundsSQL = 
-        "SELECT *
-        FROM Rankings r
+        $roundsSQL =
+        "WITH RankingsOrdered AS (
+            SELECT
+                Username,
+                ROW_NUMBER() OVER (ORDER BY Score DESC, Username DESC) AS row_num
+            FROM Rankings
+            
+        )
+        SELECT
+            row_num
+        FROM RankingsOrdered
         WHERE Username = '$localUsername'
-        ORDER BY Score DESC
-        LIMIT 5
+        LIMIT 1
         ";
 
         $stmt = $conn->query($roundsSQL);
@@ -34,6 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     } catch (PDOException $e) {
         echo "Ocorreu um erro: " . $e->getMessage();
+        $response = array(
+            'status' => 'error',
+            'message' => 'Ocorreu um erro: ' . $e->getMessage()
+        );
+        $jsonResponse = json_encode($response);
+
+        header('Content-Type: application/json');
+
+        echo $jsonResponse;
+        
     }
 } else {
     echo "Acesso inválido.";

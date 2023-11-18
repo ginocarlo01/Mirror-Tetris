@@ -5,55 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking Global - Tetris</title>
     <link rel="stylesheet" href="outsideGameStyle.css">
-    <!--<script src="Ranking.js"></script>-->
+    <script src="RankingPage.js"></script>
     
 </head>
 <body>
     <video id="background-video" autoplay loop muted >
         <source src="./Media/Cloud_Background.mp4" type="video/mp4">
     </video>
-
-    <h1 id="ranking-titulo">Ranking Global - Tetris</h1>
+    
+    
+    <div id = "ranking-titulo">
+        <p>Raking Global</p>
+        <p id="userPosition"></p>
+    </div>
+    
     <div id="ranking-container">
         <div id="shape"><br></div>
         <table id="ranking-table">
+            <thead>
             <tr>
-                <th>Posição</th>
-                <th>Nome</th>
+                <th>Username</th>
                 <th>Pontuação</th>
+                <th>Level</th>
             </tr>
-            <tr>
-                <td class="conteudo">1</td>
-                <td class="conteudo">Euler</td>
-                <td class="conteudo">500</td>
+            </thead>
+            <tbody>
+            <tr id="row1">
+                <td id="user1">-</td>
+                <td id="scoreRank1">-</td>
+                <td id="levelRank1">-</td>
             </tr>
-            <tr>
-                <td class="conteudo">2</td>
-                <td class="conteudo">Gino</td>
-                <td class="conteudo">450</td>
+
+            <tr id="row2">
+                <td id="user2">-</td>
+                <td id="scoreRank2">-</td>
+                <td id="levelRank2">-</td>
             </tr>
-            <tr>
-                <td class="conteudo">3</td>
-                <td class="conteudo">Gabriel</td>
-                <td class="conteudo">400</td>
+            
+            <tr id="row3">
+                <td id="user3">-</td>
+                <td id="scoreRank3">-</td>
+                <td id="levelRank3">-</td>
             </tr>
-            <tr>
-                <td class="conteudo">4</td>
-                <td class="conteudo">Thomas</td>
-                <td class="conteudo">350</td>
+            
+            <tr id="row4">
+                <td id="user4">-</td>
+                <td id="scoreRank4">-</td>
+                <td id="levelRank4">-</td>
             </tr>
-            <tr>
-                <td class="conteudo">5</td>
-                <td class="conteudo">João</td>
-                <td class="conteudo">300</td>
+            
+            <tr id="row5">
+                <td id="user5">-</td>
+                <td id="scoreRank5">-</td>
+                <td id="levelRank5">-</td>
             </tr>
+            
+            <tr id="row6">
+                <td id="user6">-</td>
+                <td id="scoreRank6">-</td>
+                <td id="levelRank6">-</td>
+            </tr>
+            
+            <tr id="row7">
+                <td id="user7">-</td>
+                <td id="scoreRank7">-</td>
+                <td id="levelRank7">-</td>
+            </tr>
+            
+            <tr id="row8">
+                <td id="user8">-</td>
+                <td id="scoreRank8">-</td>
+                <td id="levelRank8">-</td>
+            </tr>
+            
+            <tr id="row9">
+                <td id="user9">-</td>
+                <td id="scoreRank9">-</td>
+                <td id="levelRank9">-</td>
+            </tr>
+            
+            <tr id="row10">
+                <td id="user10">-</td>
+                <td id="scoreRank10">-</td>
+                <td id="levelRank10">-</td>
+            </tr>
+        </tbody>
         </table>
+        
     </div>
+    
     <br>
+    
     <div class="NavBox">
-        <a href="DifficultyLvl.html">Jogar</a>
-        <a href="EditPag.html"> Editar Informações</a>
-        <a href="SignUpPage.html">Sair</a>
+        <a href="CheckCredentialsBeforeGame.php">Jogar</a>
+        <a href="CheckCredentialsBeforeEdit.php"> Editar Informações</a>
+        <a href="Exit.php">Sair</a>
     </div>
 </body>
 </html>

@@ -10,20 +10,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $roundsSQL = 
         "SELECT *
-        FROM Rankings r
+        FROM Users
         WHERE Username = '$localUsername'
-        ORDER BY Score DESC
-        LIMIT 5
+        LIMIT 1
         ";
 
         $stmt = $conn->query($roundsSQL);
 
-        $rounds = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $userData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $response = array(
             'status' => 'success',
             'message' => 'Dados recuperados com sucesso',
-            'rounds' => $rounds
+            'userData' => $userData
         );
 
         $jsonResponse = json_encode($response);

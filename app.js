@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function fillRankingTable(rounds) {
     for (let i = 0; i < rounds.length; i++) {
-        const round = rounds[i]; // Obtenha os dados do round
+        const round = rounds[i]; 
         const idPartidaCell = document.getElementById(`id${i + 1}`);
         const scoreCell = document.getElementById(`score${i + 1}`);
         const levelCell = document.getElementById(`level${i + 1}`);

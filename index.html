@@ -2,8 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="app.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="style.css"></link>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Mirror Tetris</title>
   </head>
   <body>
@@ -15,14 +15,10 @@
       <button id="start-button" class="centered-button">Start - Pause</button>
     </div>
     
-    <br />
-    <br />
     <p class="centered-text">Level: <span id="level">0</span> | Timer: <span id="time">0</span> | Lines: <span id="lines">0</span></p>
-    <p class="centered-text"><a href="CheckCredentialsBeforeEdit.php">Editar Dados</a> | <a href="Exit.php">Sair</a></p>
+    <p class="centered-text"><a href="CheckCredentialsBeforeEdit.php">Editar Dados</a> | <a href="CheckCredentialsBeforeRanking.php">Ranking Global</a> | <a href="Exit.php">Sair</a></p>
     <p class="centered-text">Left/Right Arrows to move, Up Arrow to rotate and Spacebar to hard drop</p>
     
-    <br />
-    <br />
     <div class="container">
         <div class="table-container">
           <table class="ranking-table">
@@ -94,19 +90,19 @@
   
 
     <audio id="drop">
-      <source src="drop.wav" type="audio/mpeg">
+      <source src="media/drop.wav" type="audio/mpeg">
     </audio>
 
     <audio id="tetris">
-      <source src="tetris.wav" type="audio/mpeg">
+      <source src="media/tetris.wav" type="audio/mpeg">
     </audio>
 
     <audio id="lost">
-      <source src="lost.wav" type="audio/mpeg">
+      <source src="media/lost.wav" type="audio/mpeg">
     </audio>
 
     <audio id="backgroundAudio" loop>
-      <source src="backgroundsong.mp3" type="audio/mpeg">
+      <source src="media/backgroundsong.mp3" type="audio/mpeg">
     </audio>
 
     
