@@ -1,5 +1,5 @@
 body {
-    background-image: url('media/anna-teather-fantasy-bk-anim.gif'); /* Substitua 'caminho-para-sua-imagem.jpg' pelo caminho real para a sua imagem */
+    background-image: url('../../Media/anna-teather-fantasy-bk-anim.gif'); /* Substitua 'caminho-para-sua-imagem.jpg' pelo caminho real para a sua imagem */
     background-size: cover; /* Isso faz com que a imagem de fundo cubra toda a área do corpo */
     background-repeat: no-repeat; /* Evita que a imagem de fundo seja repetida */
   }

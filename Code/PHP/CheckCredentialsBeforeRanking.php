@@ -26,7 +26,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"]) ) {
 
 
             if ($localPassWord === $rowPass["Password"] && $localUserName === $rowUser["Username"]) {
-                include("Code/HTML/RankingPage.html");
+                include("../HTML/RankingPage.html");
             }
         }
     } catch (PDOException $e) {
@@ -34,7 +34,7 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"]) ) {
     }
 }
 else{
-    include("index.html");
+    include("../HTML/index.html");
 }  
     
 ?>

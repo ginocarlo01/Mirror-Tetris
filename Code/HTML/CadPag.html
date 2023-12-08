@@ -4,21 +4,21 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Sign-Up</title>
-    <script src="CadPag.js"></script>
-    <link rel='stylesheet' type='text/css' media='screen' href='outsideGameStyle.css'>
+    <script src="../JS/CadPag.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/outsideGameStyle.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <video id="background-video" autoplay loop muted>
-        <source src="./Media/Cloud_Background.mp4" type="video/mp4">
+        <source src="../../Media/Cloud_Background.mp4" type="video/mp4">
     </video>
 
     <div class="LogInBox">
         <p>Bem-Vindo ao Tetris!</p>
 
-        <form action='Cadastro.php' method='POST'>
+        <form action='../PHP/Cadastro.php' method='POST'>
 
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br><br>
@@ -42,10 +42,10 @@
             <input type="password" id="pass_word" name="pass_word"><br><br>
 
             <button type="submit" class="LogIn_button" id="log_in" name="log_in">Cadastrar</button>
-            <button class="LogIn_button" id="log_but" name="log_but" formaction="index.html">Já tem uma conta?</button>
+            <button class="LogIn_button" id="log_but" name="log_but" formaction="../HTML/index.html">Já tem uma conta?</button>
         </form>
     </div>
 
-    <audio src="./Media/YabujinFLASHCASANOVA.mp3" preload="auto" autoplay loop></audio>
+    <audio src="../../Media/YabujinFLASHCASANOVA.mp3" preload="auto" autoplay loop></audio>
 </body>
 </html>

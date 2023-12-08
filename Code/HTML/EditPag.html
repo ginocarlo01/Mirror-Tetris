@@ -4,8 +4,8 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Edit</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='outsideGameStyle.css'>
-    <script src="EditPage.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/outsideGameStyle.css'>
+    <script src="../JS/EditPage.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
@@ -14,13 +14,13 @@
 <body>
 
     <video id="background-video" autoplay loop muted >
-        <source src="./Media/Cloud_Background.mp4" type="video/mp4">
+        <source src="../../Media/Cloud_Background.mp4" type="video/mp4">
     </video>
 
     <div class="LogInBox">
         <p>Editar dados pessoais</p>
         <p>Preencha todos os campos para poder fazer a alteração</p>
-        <form action='UpdateDataUser.php' method='POST'>
+        <form action='../PHP/UpdateDataUser.php' method='POST'>
 
             <label for="name_completo">Nome Completo:</label><br>
             <input type="text" id="name_completo" name="name_completo" autocomplete="name"><br><br>
@@ -35,12 +35,12 @@
             <input type="password" id="pass_word" name="pass_word" autocomplete="current-password"><br><br>
         
             <button type="submit" class="LogIn_button" id="saveChanges" name="saveChanges">Salvar Alteracoes</button>
-            <button class="LogIn_button" id="backGame" name="backGame" formaction="CheckCredentialsBeforeGame.php">Voltar ao jogo</button>
+            <button class="LogIn_button" id="backGame" name="backGame" formaction="../PHP/CheckCredentialsBeforeGame.php">Voltar ao jogo</button>
         </form>
         
     </div>
 
-    <audio src="./Media/YabujinFLASHCASANOVA.mp3" preload="auto" autoplay loop></audio>
+    <audio src="../../Media/YabujinFLASHCASANOVA.mp3" preload="auto" autoplay loop></audio>
 
 
 

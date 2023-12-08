@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   
-    xhttp.open('POST', 'Code/PHP/GetRoundData.php', true);
+    xhttp.open('POST', '../PHP/GetRoundData.php', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   
     xhttp.send();
@@ -796,7 +796,7 @@ function sendRoundData() {
       return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
   }).join('&');
 
-  xhttp.open('POST', 'Code/PHP/SendRoundData.php', true);
+  xhttp.open('POST', '../PHP/SendRoundData.php', true);
   xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhttp.send(encodedData);
 }

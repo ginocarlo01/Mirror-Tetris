@@ -28,14 +28,14 @@ if (isset($_POST["username"])) {
             if ($localPassWord === $rowPass["Password"] && $localUserName === $rowUser["Username"]) {
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["password"] = $_POST["pass_word"];
-                include("Code/HTML/Game.html");
+                include("../HTML/Game.html");
             } else {
                 $mensagem = "Senha incorreta";
-                header("Location: Code/HTML/index.html?mensagem=$mensagem!");
+                header("Location: ../HTML/index.html?mensagem=$mensagem!");
             }
         } else {
             $mensagem = "Username não existe";
-            header("Location: Code/HTML/index.html?mensagem=$mensagem!");
+            header("Location: ../HTML/index.html?mensagem=$mensagem!");
         }
     } catch (PDOException $e) {
         echo "Ocorreu um erro: " . $e->getMessage();
@@ -45,6 +45,6 @@ if (isset($_POST["username"])) {
     
 }
 else{
-    include("Code/HTML/index.html");
+    include("../HTML/index.html");
 }
 ?>

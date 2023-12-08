@@ -51,7 +51,7 @@ function getRankingData() {
     }
   };
   
-    xhttp.open('POST', 'Code/PHP/GetRankingData.php', true);
+    xhttp.open('POST', '../PHP/GetRankingData.php', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   
     xhttp.send();
@@ -81,7 +81,7 @@ function getRankingData() {
     }
   };
   
-    xhttp.open('POST', 'Code/PHP/GetUserRankingData.php', true);
+    xhttp.open('POST', '../PHP/GetUserRankingData.php', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   
     xhttp.send();
