@@ -31,11 +31,11 @@ if (isset($_POST["username"])) {
                 include("index.html");
             } else {
                 $mensagem = "Senha incorreta";
-                header("Location: SignUpPage.html?mensagem=$mensagem!");
+                header("Location: index.html?mensagem=$mensagem!");
             }
         } else {
             $mensagem = "Username não existe";
-            header("Location: SignUpPage.html?mensagem=$mensagem!");
+            header("Location: index.html?mensagem=$mensagem!");
         }
     } catch (PDOException $e) {
         echo "Ocorreu um erro: " . $e->getMessage();
@@ -45,6 +45,6 @@ if (isset($_POST["username"])) {
     
 }
 else{
-    include("SignUpPage.html");
+    include("index.html");
 }
 ?>

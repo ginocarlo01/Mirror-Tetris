@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     emailInput.addEventListener("input", checkInputs);
     passWordInput.addEventListener("input", checkInputs);
 
+    document.getElementById('tel').addEventListener('input', function (e) {
+        // Remove todos os caracteres não numéricos
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
     function checkInputs() {
         if (nameCompletoInput.value.trim() !== "" &&
             telInput.value.trim() !== "" &&

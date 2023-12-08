@@ -16,7 +16,7 @@ if (isset($_POST["name_co"]))
         $stmt->bindParam(7, $_POST["pass_word"]);
         $stmt->execute();
         
-        include("SignUpPage.html");
+        include("index.html");
     }
     catch(PDOException $e)
     {

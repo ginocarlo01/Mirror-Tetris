@@ -20,7 +20,7 @@ if (isset($_POST["name_completo"])) {
             unset($_SESSION['username']);
             unset($_SESSION['password']);
             $mensagem = "Dados atualizados, faca login novamente";
-            header("Location: SignUpPage.html?mensagem=$mensagem!");
+            header("Location: index.html?mensagem=$mensagem!");
         } else {
             include("CheckCredentialsBeforeEdit.php");
         }
