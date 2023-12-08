@@ -2,10 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let width = 12;
   let height = 21;
+  const oriStartPos = 5;
 
   let newWidth = 24;
   let newHeight = 45;
+  const newStartPos = 11;
 
+  let startPos = oriStartPos;
   let oriWidth = width;
   let oriHeight = height;
 
@@ -70,11 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res === 'new') {
       width = newWidth;
       height = newHeight;
+      startPos = newStartPos;
       tetrisGrid.style.width = `480px`;
       tetrisGrid.style.height = `900px`;
     } else {
       width = oriWidth;
       height = oriHeight;
+      startPos = oriStartPos;
       tetrisGrid.style.width = `240px`;
       tetrisGrid.style.height = `420px`;
     }
@@ -129,7 +134,7 @@ let isTimerRunning = false; // Variável de controle
 let linesCleaned = 0;
 let currentLevel = 0;
 
-const startPos = 18;
+
 let isInverted = false;
 
 backgroundColorsBorder = ['grey', 'darkgreen']

@@ -28,7 +28,7 @@ if (isset($_POST["username"])) {
             if ($localPassWord === $rowPass["Password"] && $localUserName === $rowUser["Username"]) {
                 $_SESSION["username"] = $_POST["username"];
                 $_SESSION["password"] = $_POST["pass_word"];
-                include("index.html");
+                include("Game.html");
             } else {
                 $mensagem = "Senha incorreta";
                 header("Location: index.html?mensagem=$mensagem!");
