@@ -20,9 +20,9 @@ if (isset($_POST["name_completo"])) {
             unset($_SESSION['username']);
             unset($_SESSION['password']);
             $mensagem = "Dados atualizados, faca login novamente";
-            header("Location: index.html?mensagem=$mensagem!");
+            header("Location: Code/HTML/index.html?mensagem=$mensagem!");
         } else {
-            include("CheckCredentialsBeforeEdit.php");
+            include("Code/PHP/CheckCredentialsBeforeEdit.php");
         }
     } catch (PDOException $e) {
         echo "Ocorreu um erro: " . $e->getMessage(); 

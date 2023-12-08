@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (isset($_SESSION["username"]) && isset($_SESSION["password"]) ) {
-
-    $localUserName = $_SESSION["username"];
-    $localPassWord = $_SESSION["password"];
+if (isset($_POST["username"])) {
+    session_start();
+    $localUserName = $_POST["username"];
+    $localPassWord = $_POST["pass_word"];
+    $mensagem = "";
 
     try {
         $conn = new PDO("mysql:host=localhost;dbname=myDB", "root", "");
@@ -24,16 +24,27 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"]) ) {
             $rowUser = $stmtUser->fetch(PDO::FETCH_ASSOC);
             $rowPass = $stmtPass->fetch(PDO::FETCH_ASSOC);
 
+
             if ($localPassWord === $rowPass["Password"] && $localUserName === $rowUser["Username"]) {
-                include("EditPag.html");
+                $_SESSION["username"] = $_POST["username"];
+                $_SESSION["password"] = $_POST["pass_word"];
+                include("Code/HTML/Game.html");
+            } else {
+                $mensagem = "Senha incorreta";
+                header("Location: Code/HTML/index.html?mensagem=$mensagem!");
             }
+        } else {
+            $mensagem = "Username não existe";
+            header("Location: Code/HTML/index.html?mensagem=$mensagem!");
         }
     } catch (PDOException $e) {
         echo "Ocorreu um erro: " . $e->getMessage();
     }
+
+    echo $mensagem;
+    
 }
 else{
-    include("index.html");
-}  
-    
+    include("Code/HTML/index.html");
+}
 ?>

@@ -1,5 +1,5 @@
 <?php 
 session_start();
 session_destroy(); 
-include("index.html");
+include("Code/HTML/index.html");
 ?>

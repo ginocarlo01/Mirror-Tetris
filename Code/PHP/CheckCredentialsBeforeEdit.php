@@ -24,9 +24,8 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"]) ) {
             $rowUser = $stmtUser->fetch(PDO::FETCH_ASSOC);
             $rowPass = $stmtPass->fetch(PDO::FETCH_ASSOC);
 
-
             if ($localPassWord === $rowPass["Password"] && $localUserName === $rowUser["Username"]) {
-                include("Game.html");
+                include("Code/HTML/EditPag.html");
             }
         }
     } catch (PDOException $e) {
